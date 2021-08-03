@@ -22,8 +22,7 @@ function makeBoard() {
   for (let i = 0; i < HEIGHT; i++) {
     arr[i] = [];
     for (let j = 0; j < WIDTH; j++) {
-      arr[i][j] = [];
-      
+      arr[i][j] = [null];
     }
   }
 
@@ -34,8 +33,8 @@ function makeBoard() {
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
-  // TODO: add comment for this code
+  const htmlBoard = document.querySelector('#board');
+  // Creates the top row above the game board, which you can click on to place pieces. Gives each div a unique numbered ID.
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
@@ -47,7 +46,7 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
+  // Creates the gameboard in which pieces will be placed. Generates a board of td elements with unique ID of "y-x" positions starting from 0-0.
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
@@ -70,6 +69,10 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  const piece = document.createElement('div');
+  piece.classList.add('piece', 'p' + currPlayer);
+
+  document.getElementById(`${y}-${x}`).append(piece);
 }
 
 /** endGame: announce game end */
