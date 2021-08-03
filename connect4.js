@@ -22,7 +22,7 @@ function makeBoard() {
   for (let i = 0; i < HEIGHT; i++) {
     arr[i] = [];
     for (let j = 0; j < WIDTH; j++) {
-      arr[i][j] = [null];
+      arr[i][j] = null;
     }
   }
 
@@ -39,17 +39,17 @@ function makeHtmlBoard() {
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  for (var x = 0; x < WIDTH; x++) {
-    var headCell = document.createElement("td");
+  for (let x = 0; x < WIDTH; x++) {
+    const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
   htmlBoard.append(top);
 
   // Creates the gameboard in which pieces will be placed. Generates a board of td elements with unique ID of "y-x" positions starting from 0-0.
-  for (var y = 0; y < HEIGHT; y++) {
+  for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
@@ -61,9 +61,8 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  for (let i = HEIGHT-1; i >= 0; i--) {
-    if(board[i][x] === 1 || board[i][x] === 2){
+  for(let i = HEIGHT - 1; i >= 0; i--) {
+    if(board[i][x] === null){
       return i;
     }
   }
@@ -84,17 +83,19 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
-  alert(msg);
+  setTimeout(() => {
+    alert(msg);
+  }, 300);
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
