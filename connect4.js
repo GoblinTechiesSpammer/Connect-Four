@@ -144,7 +144,7 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
+  // Iterates over every single spot on the game board, and checks to see if there is a valid pattern created with the current game pieces. Only checks diagDR and diagDL from the bottom up because top down is redundant.
 
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
